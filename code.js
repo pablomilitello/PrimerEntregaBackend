@@ -1,11 +1,11 @@
 class ProductManager {
   constructor() {
     this.products = [];
+    this.codeVerificator = [];
   }
 
   addProduct(title, description, price, thumbnail, code, stock) {
     const id = this.products.length === 0 ? 1 : this.products[this.products.length - 1].id + 1;
-    const codeVerificator = [];
     const product = {
       id,
       title,
@@ -16,12 +16,11 @@ class ProductManager {
       stock,
     };
 
-    if (!codeVerificator.includes(code)) {
-      codeVerificator.push(code);
-      console.log(codeVerificator);
+    if (!this.codeVerificator.includes(code)) {
+      this.codeVerificator.push(code);
       this.products.push(product);
     } else {
-      console.log(`It exist the product with this code yet`);
+      console.log(`--> It exist the product with this code ${code} yet`);
     }
   }
 
@@ -30,11 +29,11 @@ class ProductManager {
   }
 
   getProductById(id) {
-    let requestProduct = this.products.find((product) => product.id === id);
-    if (requestProduct) {
-      console.log(`The product with ID N° ${id} is ${requestProduct}`);
+    const productById = this.products.find((product) => product.id === id);
+    if (productById) {
+      console.log(productById);
     } else {
-      console.log(`Not found`);
+      console.log(`--> Not found`);
     }
   }
 }
@@ -45,7 +44,6 @@ product.addProduct("jeans", "blue jeans medium", 30, true, "ABC0001", 10);
 product.addProduct("shirt", "white shirt medium", 20, true, "ABC0002", 7);
 product.addProduct("shoes", "black shoes 41", 22, true, "ABC0002", 15);
 
-product.getProducts();
-//console.log(product);
+console.log(product.getProducts());
 
-product.getProductById("ABC0001");
+product.getProductById(2);
